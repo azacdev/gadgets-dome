@@ -22,10 +22,10 @@ const GadgetCard = ({ data }) => {
     <div
       className={`${
         theme ? "bg-light-black" : "bg-light"
-      } card w-60 shadow-xl p-0 overflow-hidden mx-auto mb-4 pb-4 duration-200 hover:scale-105`}
+      }  relative flex flex-col rounded-md w-60 shadow-xl p-0 overflow-hidden mb-4 pb-4 duration-200 hover:scale-105`}
     >
       <Link to={id ? `/gadget/${id}` : ""}>
-        <figure className="flex bg-white justify-center pt-2 h-48 overflow-hidden">
+        <figure className="flex items-center bg-white justify-center pt-2 h-48 overflow-hidden">
           <img src={img} alt={title} className="w-36" />
         </figure>
         <div className="card-body p-4 ">
@@ -40,6 +40,7 @@ const GadgetCard = ({ data }) => {
           Add To Cart
           <FaCartArrowDown className="ml-1" />
         </button>
+        <button className=" "></button>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import Footer from "./Footer";
+import Footer from "../components/footer/Footer";
 import { useCart } from "react-use-cart";
 import { useThemeHook } from "../components/ThemeProvider";
 import { BsCartX } from "react-icons/bs";

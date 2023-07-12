@@ -1,4 +1,4 @@
-import Footer from "./Footer";
+import Footer from "../components/footer/Footer";
 import { useEffect, useState } from "react";
 import { useThemeHook } from "../components/ThemeProvider";
 import { useSearchHook } from "../components/SearchTermProvider";
@@ -87,7 +87,7 @@ const Home = () => {
   };
 
   return (
-    <div className="text-center pb-3.5">
+    <div className="text-center">
       {searchTerm ? (
         ""
       ) : (
@@ -124,9 +124,10 @@ const Home = () => {
       {searchTerm ? (
         ""
       ) : (
-        <div className="containerWrap p-4">
+        <div className="containerWrap p-2">
           <h1 className="capitalize text-left text-2xl md:text-3xl">Categories</h1>
-          <div className="flex justify-center sm:justify-start gap-4 my-10 ">
+          <div className="flex justify-center sm:justify-start gap-4 my-10 overflow-x-auto md:overflow-x-hidden">
+            <div className="flex gap-2">
             {categories.map((cat, id) => (
               <div
                 className={`${
@@ -155,13 +156,15 @@ const Home = () => {
                 </div>
               </div>
             ))}
+
+            </div>
           </div>
         </div>
       )}
 
-      <div className="containerWrap p-4">
+      <div className="containerWrap p-2 md:p-0">
         <h1 className="capitalize text-left text-2xl md:text-3xl">{category}</h1>
-        <div className="flex flex-wrap gap-4 my-6">
+        <div className="flex flex-wrap justify-center gap-3 my-6">
           {filterProducts
             .filter((val) => {
               if (searchTerm === "") {
