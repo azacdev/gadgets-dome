@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.containerWrap {
+  @apply container mx-auto max-w-5xl
+}
+
+/* dark theme */
+
+.bg-black {
+  background-color: black;
+}
+
+.bg-light-black {
+  background-color: #262626 !important;
+}
+
+.nav-dark {
+  background-color: #000;
+}
+
+.text-black {
+  color: black;
+}
+
+.text-light-black {
+  color: #262626;
+}
+
+.bg-dark-primary {
+  background-color: #FCBC73 !important;
+}
+
+.text-dark-primary {
+  color: #FCBC73 !important;
+}
+
+/* theme light */
+
+.bg-light {
+  background-color: white;
+}
+
+.bg-light-2 {
+  background-color: #DADCDE;
+}
+
+.bg-light-primary {
+  background-color: #191659 !important;
+}
+
+.nav-light {
+  background-color: #ECECEC ;
+}
+
+.text-light-primary {
+  color: #191659 !important;
+}
+
+.svg-animate {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  height: 85vh;
+}
