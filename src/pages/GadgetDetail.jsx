@@ -37,53 +37,6 @@ const GadgetDetail = () => {
   };
 
   return (
-    // <div className={`${theme ? "bg-light-black" : "bg-light"}`}>
-    //   <div className="containerWrap flex flex-col gap-5 lg:flex-row p-24">
-    //     <div
-    //       className={`${
-    //         theme ? "bg-light-black" : "bg-light"
-    //       } grid flex-grow max-w-lg p-4 items-center rounded-lg`}
-    //     >
-    //       <img src={img} className="w-full max-w-full rounded-md" alt={title} />
-    //     </div>
-
-    //     <div
-    //       className={`${
-    //         theme ? "bg-light-black" : "bg-light"
-    //       } grid flex-grow gap-3 max-w-lg p-6 rounded-lg`}
-    //     >
-    //       <div>
-    //         <h1 className="text-4xl">{title}</h1>
-    //         <h4 className="text-xl">
-    //           Price: $<span className="text-2xl">{price}</span>
-    //         </h4>
-    //         <h4 className="text-xl">
-    //           Brand: <span className="text-2xl">{brand}</span>
-    //         </h4>
-    //       </div>
-
-    //       <div>
-    //         <h4 className="text-2xl">Features</h4>
-    //         <h4 className="text-base">{description}</h4>
-    //       </div>
-
-    //       <div className="flex flex-wrap justify-between">
-    //         <h4 className="text-xl capitalize">
-    //           Category: <span className="text-2xl">{category}</span>
-    //         </h4>
-    //         <h4 className="text-xl">
-    //           Rating: <span className="text-2xl">{rating}</span>
-    //         </h4>
-    //       </div>
-    //       <div>
-    //         <button className="btn" onClick={addToCart}>
-    //           Add To Cart
-    //           <FaCartArrowDown className="ml-1" />
-    //         </button>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
     <div className={`bg-${theme ? "light-black" : "light"}`}>
       <div className="containerWrap flex flex-col lg:flex-row p-8 lg:p-24 gap-8">
         <div
