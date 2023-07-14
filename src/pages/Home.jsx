@@ -128,7 +128,7 @@ const Home = () => {
           <h1 className="capitalize text-left text-2xl md:text-3xl">
             Categories
           </h1>
-          <div className="flex justify-center sm:justify-start gap-4 my-10 overflow-x-auto md:overflow-hidden">
+          <div className="flex sm:justify-start gap-4 my-10 overflow-auto md:overflow-hidden">
             <div className="flex gap-4">
               {categories.map((cat, id) => (
                 <div

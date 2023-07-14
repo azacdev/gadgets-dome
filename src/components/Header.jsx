@@ -56,7 +56,7 @@ const Header = () => {
                   : "bg-light text-light-primary"
               } ${
                 expanded ? "w-full" : "hidden"
-              } px-2 py-[5px] border-y-[1px] border-[#666666] rounded-l-lg outline-0 transition-all duration-300`}
+              } px-2 py-[5px] border-y-[1px] border-l-[1px] border-[#666666] rounded-l-lg outline-0 transition-all duration-300`}
             />
             <button
               className={`
