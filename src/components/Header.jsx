@@ -1,11 +1,22 @@
+/* eslint-disable react/display-name */
 import { Link } from "react-router-dom";
 import { useThemeHook } from "./ThemeProvider";
+import { useCart } from "react-use-cart";
 import { FaCartArrowDown } from "react-icons/fa";
+import { memo } from "react";
 
-export const Header = ({addToCart, displayProduct}) => {
+const Header = memo(({ displayProduct }) => {
   const [theme] = useThemeHook();
 
-  const { id, title, description, img } = displayProduct;
+
+  let id, title, description, img;
+  if (displayProduct) {
+    ({ id, title, description, img } = displayProduct);
+  }
+  const { addItem } = useCart();
+  const addToCart = () => {
+    addItem(displayProduct);
+  };
 
   return (
     <div className={`${theme ? "bg-light-black" : "bg-light"} p-0 md:p-8`}>
@@ -33,4 +44,6 @@ export const Header = ({addToCart, displayProduct}) => {
       </div>
     </div>
   );
-};
+});
+
+export default Header;

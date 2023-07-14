@@ -1,7 +1,9 @@
+/* eslint-disable react/display-name */
+import { memo } from "react";
 import { categories } from "./CategoriesContent";
 import { useThemeHook } from "./ThemeProvider";
 
-const Catergories = ({products, setFilterProducts, setCategory}) => {
+const Catergories = memo(({ products, setFilterProducts, setCategory }) => {
   const [theme] = useThemeHook();
 
   return (
@@ -41,6 +43,6 @@ const Catergories = ({products, setFilterProducts, setCategory}) => {
       </div>
     </div>
   );
-};
+});
 
 export default Catergories;
