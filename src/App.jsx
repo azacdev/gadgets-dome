@@ -1,6 +1,6 @@
 import { useThemeHook } from "./components/ThemeProvider";
 import "./App.css";
-import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 import { SearchProvider } from './components/SearchTermProvider';
 import { Routes, Route } from "react-router-dom";
 //Pages
@@ -16,7 +16,7 @@ function App() {
     overflow-y-auto h-screen`}
     >
       <SearchProvider>
-        <Header />
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
