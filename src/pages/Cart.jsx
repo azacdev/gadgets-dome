@@ -16,70 +16,68 @@ const Cart = () => {
   } = useCart();
 
   return (
-    <div className="containerWrap py-16 m-4">
-      <h1
-        className={`${
-          theme ? "text-light" : "text-light-primary"
-        } text-3xl my-5 text-center`}
-      >
+    <div className="containerWrap p-2 m-4">
+      <h1 className=" text-3xl my-5 text-start">
         {isEmpty ? "Your Cart is Empty" : "Cart"}
       </h1>
 
       {items.map((item, idx) => (
         <div
-          className={` ${
-            theme ? "bg-light-black" : "bg-light"
-          } flex items-center gap-2 p-2 `}
+          className={`flex items-center gap-2 p-2 mb-2 border-2 border-gray-400 rounded-md`}
           key={idx}
         >
-          <div className="bg-white overflow-hidden flex justify-center items-center p-2 w-20 sm:w-32">
+          <div className="bg-white overflow-hidden flex-grow sm:flex-grow-0 flex justify-center items-center w-20 sm:w-32 rounded-md">
             <img
               src={item.img}
-              className="w-8 h-12 sm:w-16 sm:h-24"
+              className="w-full h-full object-cover"
               alt={item.title}
             />
           </div>
 
-          <div className="flex flex-1 justify-evenly gap-2">
-            <h6 className="w-20 text-sm sm:text-xl capitalize text-ellipsis overflow-hidden whitespace-nowrap">
-              {item.title}
-            </h6>
-            <p className="text-sm sm:text-xl">${item.price}</p>
-            <p className="text-sm sm:text-xl">{item.quantity}</p>
-          </div>
-
-          <div className="flex flex-wrap sm:flex-row gap-1 justify-center">
-            <button
-              className="btn btn-sm sm:btn-md"
-              onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
-            >
-              -
-            </button>
-            <button
-              className="btn btn-sm sm:btn-md"
-              onClick={() => updateItemQuantity(item.id, item.quantity + 1)}
-            >
-              +
-            </button>
-            <button
-              className="btn btn-xs sm:btn-md btn-error"
-              onClick={() => removeItem(item.id)}
-            >
-              Remove Item
-            </button>
+          <div className="flex-grow sm:flex-auto flex justify-between text-center flex-col sm:flex-row items-center">
+            <div className="sm:flex-grow flex flex-col sm:flex-row">
+              <h6 className="w-20 text-xl capitalize overflow-hidden whitespace-nowrap text-ellipsis sm:flex-grow sm:whitespace-normal">
+                {item.title}
+              </h6>
+              <p className="text-lg">${item.price}</p>
+            </div>
+            <div className="flex flex-1 flex-col sm:flex-row items-center justify-between sm:justify-evenly gap-2">
+              <div className="flex items-center gap-1">
+                <button
+                  className="btn btn-md"
+                  onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
+                >
+                  -
+                </button>
+                <p className="text-xl sm:text-xl">{item.quantity}</p>
+                <button
+                  className="btn btn-md"
+                  onClick={() => updateItemQuantity(item.id, item.quantity + 1)}
+                >
+                  +
+                </button>
+              </div>
+              <button
+                className="btn btn-sm sm:btn-md btn-error"
+                onClick={() => removeItem(item.id)}
+              >
+                Remove Item
+              </button>
+            </div>
           </div>
         </div>
       ))}
+
       {!isEmpty && (
         <div
-          className={`cart-summary fixed left-0 bottom-0 flex justify-between w-full items-center p-2 shadow-lg ${
+          className={`fixed left-0 bottom-0 w-full p-2 shadow-lg ${
             theme ? "bg-light-black text-light" : "bg-light text-black"
           }`}
         >
-          <h4 className="text-base md:text-xl font-bold">
-            Total Price: ${cartTotal}
-          </h4>
-          <div>
+          <div className="containerWrap flex justify-between items-center">
+            <h4 className="text-base md:text-xl font-bold">
+              Total Price: ${cartTotal}
+            </h4>
             <button className="btn m-2" onClick={() => emptyCart()}>
               <BsCartX className="text-base mr-1" /> Clear Cart
             </button>

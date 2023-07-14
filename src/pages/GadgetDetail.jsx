@@ -38,7 +38,7 @@ const GadgetDetail = () => {
 
   return (
     <div className={`bg-${theme ? "light-black" : "light"}`}>
-      <div className="containerWrap flex flex-col lg:flex-row p-8 lg:p-24 gap-8">
+      <div className="containerWrap flex flex-col lg:flex-row p-4 md:p-16 gap-8">
         <div
           className={`bg-${
             theme ? "light-black" : "light"
