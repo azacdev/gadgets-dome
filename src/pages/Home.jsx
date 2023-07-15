@@ -29,7 +29,7 @@ const Home = () => {
     fetchProductsData();
   }, [fetchProductsData]);
 
-  const filterdProductsList = useMemo(() => {
+  const filteredProductsList = useMemo(() => {
     return filterProducts.filter((val) => {
       if (searchTerm === "") {
         return val;
@@ -104,12 +104,16 @@ const Home = () => {
 
       <div className="containerWrap p-2 mt-4">
         <h1 className="capitalize text-left text-2xl md:text-3xl">
-          {category}
+          {!searchTerm && category}
         </h1>
         <div className="flex flex-wrap justify-center gap-3 my-6">
-          {filterdProductsList.map((result) => (
-            <GadgetCard data={result} key={result.id} />
-          ))}
+          {filteredProductsList.length === 0 ? (
+            <h1 className="text-3xl h-screen">No products match your search</h1>
+          ) : (
+            filteredProductsList.map((result) => (
+              <GadgetCard data={result} key={result.id} />
+            ))
+          )}
         </div>
       </div>
       <Footer />

@@ -1,4 +1,5 @@
 import { useThemeHook } from "./ThemeProvider";
+import {FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"
 
 const Footer = () => {
   const [theme] = useThemeHook();
@@ -26,10 +27,9 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#">
-                  Graphics Card &amp; Keyboard 
+                  Graphics Card 
                 </a>
               </li>
-              {/* Add more categories */}
             </ul>
           </div>
           <div className="w-full md:w-1/2 lg:w-1/4 xl:w-1/4 mb-4">
@@ -44,19 +44,18 @@ const Footer = () => {
             <p className="text-gray-400">123 Main Street, City, Country</p>
             <p className="text-gray-400">info@gadgets-dome.com</p>
           </div>
-          <div className="w-full md:w-1/2 lg:w-1/4 xl:w-1/4 mb-4">
+          <div className=" w-full md:w-1/2 lg:w-1/4 xl:w-1/4 mb-4">
             <h2 className=" text-lg font-semibold mb-2">Follow Us</h2>
-            <div className="flex space-x-4">
+            <div className="flex justify-center space-x-4">
               <a href="#">
-                <i className="fab fa-facebook-square text-2xl"></i>
+                <FaFacebook/>
               </a>
               <a href="#">
-                <i className="fab fa-twitter-square text-2xl"></i>
+                <FaInstagram/>
               </a>
               <a href="#">
-                <i className="fab fa-instagram-square text-2xl"></i>
+                <FaTwitter/>
               </a>
-              {/* Add more social media links */}
             </div>
           </div>
         </div>

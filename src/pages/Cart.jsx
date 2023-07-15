@@ -72,26 +72,27 @@ const Cart = () => {
             </div>
           </div>
         ))}
-
       </div>
+      {!isEmpty && (
+        <div className="mb-16">
+          <Footer />
+        </div>
+      )}
 
-      <Footer />
-        {!isEmpty && (
-          <div
-            className={`${
-              theme ? "bg-light-black text-light" : "bg-light text-black"
-            } sticky left-0 bottom-0 w-full p-2 border-t-2 border-gray-600 z-10`}
-          >
-            <div className="containerWrap flex justify-between items-center">
-              <h4 className="text-base md:text-xl font-bold">
-                Total Price: ${cartTotal}
-              </h4>
-              <button className="btn m-2" onClick={() => emptyCart()}>
-                <BsCartX className="text-base mr-1" /> Clear Cart
-              </button>
-            </div>
-          </div>
-        )}
+      <div
+        className={`${
+          theme ? "bg-light-black text-light" : "bg-light text-black"
+        } fixed left-0 bottom-0 w-full p-2 border-t-2 border-gray-600`}
+      >
+        <div className="containerWrap flex justify-between items-center">
+          <h4 className="text-base md:text-xl font-bold">
+            Total Price: ${cartTotal}
+          </h4>
+          <button className="btn m-2" onClick={() => emptyCart()}>
+            <BsCartX className="text-base mr-1" /> Clear Cart
+          </button>
+        </div>
+      </div>
     </>
   );
 };

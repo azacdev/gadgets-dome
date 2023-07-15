@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useThemeHook } from "../components/ThemeProvider";
 import { FaCartArrowDown } from "react-icons/fa";
 import { useCart } from "react-use-cart";
+import Footer from "../components/Footer";
 
 const GadgetDetail = () => {
   const { id } = useParams();
@@ -13,21 +14,22 @@ const GadgetDetail = () => {
   const updatedPrice = parseInt(gadgetDetails.price);
   gadgetDetails.price = updatedPrice;
 
-  const fetchProductsDataById = async () => {
+  const fetchProductsDataById = useCallback(async () => {
     try {
       const res = await fetch(`https://itproducts.onrender.com/products/${id}`);
-      if (!res.ok) throw new Error("Oops! An error has occured");
+      if (!res.ok) {
+        throw new Error("Oops! An error has occured");
+      }
       const data = await res.json();
-      console.log(data);
       setGadgetDetails(data);
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     fetchProductsDataById();
-  }, []);
+  }, [fetchProductsDataById]);
 
   const { img, title, price, brand, description, category, rating } =
     gadgetDetails;
@@ -36,8 +38,57 @@ const GadgetDetail = () => {
     addItem(gadgetDetails);
   };
 
+  if (gadgetDetails.length === 0)
+    return (
+      <svg
+        className="svg-animate"
+        version="1.1"
+        id="L6"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+        x="0px"
+        y="0px"
+        viewBox="0 0 100 100"
+        enableBackground="new 0 0 100 100"
+        xmlSpace="preserve"
+      >
+        <rect
+          fill="none"
+          stroke="#666666"
+          strokeWidth="4"
+          x="25"
+          y="25"
+          width="50"
+          height="50"
+        >
+          <animateTransform
+            attributeName="transform"
+            dur="0.5s"
+            from="0 50 50"
+            to="180 50 50"
+            type="rotate"
+            id="strokeBox"
+            attributeType="XML"
+            begin="rectBox.end"
+          />
+        </rect>
+        <rect x="27" y="27" fill="#666666" width="46" height="50">
+          <animate
+            attributeName="height"
+            dur="1.3s"
+            attributeType="XML"
+            from="50"
+            to="0"
+            id="rectBox"
+            fill="freeze"
+            begin="0s;strokeBox.end"
+          />
+        </rect>
+      </svg>
+    );
+
   return (
-    <div className={`bg-${theme ? "light-black" : "light"}`}>
+    <div className={`${theme ? "light-black" : "light"} h-screen`}>
       <div className="containerWrap flex flex-col lg:flex-row p-4 md:p-16 gap-8">
         <div
           className={`bg-${
@@ -85,6 +136,7 @@ const GadgetDetail = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };
