@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import axios from "axios"
 import { useSearchHook } from "../components/SearchTermProvider";
 import Header from "../components/Header";
 import Catergories from "../components/Catergories";
@@ -11,23 +12,36 @@ const Home = () => {
   const [category, setCategory] = useState("All Categories");
   const [searchTerm] = useSearchHook();
 
-  const fetchProductsData = useCallback(async () => {
-    try {
-      const res = await fetch("https://itproducts.onrender.com/products");
-      if (!res.ok) {
-        throw new Error("Oops! An error has occured");
-      }
-      const data = await res.json();
-      setProducts(data);
-      setFilterProducts(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  // const fetchProductsData = useCallback(async () => {
+  //   try {
+  //     const res = await fetch("https://itproducts.onrender.com/products");
+  //     if (!res.ok) {
+  //       throw new Error("Oops! An error has occured");
+  //     }
+  //     const data = await res.json();
+  //     setProducts(data);
+  //     setFilterProducts(data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }, []);
 
+  // useEffect(() => {
+  //   fetchProductsData();
+  // }, [fetchProductsData]);
   useEffect(() => {
-    fetchProductsData();
-  }, [fetchProductsData]);
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("https://itproducts.onrender.com/products");
+        setProducts(res.data);
+        setFilterProducts(res.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const filteredProductsList = useMemo(() => {
     return filterProducts.filter((val) => {

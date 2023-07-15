@@ -4,6 +4,7 @@ import { useThemeHook } from "../components/ThemeProvider";
 import { FaCartArrowDown } from "react-icons/fa";
 import { useCart } from "react-use-cart";
 import Footer from "../components/Footer";
+import axios from "axios";
 
 const GadgetDetail = () => {
   const { id } = useParams();
@@ -14,22 +15,20 @@ const GadgetDetail = () => {
   const updatedPrice = parseInt(gadgetDetails.price);
   gadgetDetails.price = updatedPrice;
 
-  const fetchProductsDataById = useCallback(async () => {
-    try {
-      const res = await fetch(`https://itproducts.onrender.com/products/${id}`);
-      if (!res.ok) {
-        throw new Error("Oops! An error has occured");
-      }
-      const data = await res.json();
-      setGadgetDetails(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [id]);
-
   useEffect(() => {
-    fetchProductsDataById();
-  }, [fetchProductsDataById]);
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          `https://itproducts.onrender.com/products/${id}`
+        );
+        setGadgetDetails(res.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   const { img, title, price, brand, description, category, rating } =
     gadgetDetails;
@@ -136,7 +135,7 @@ const GadgetDetail = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
