@@ -12,23 +12,6 @@ const Home = () => {
   const [category, setCategory] = useState("All Categories");
   const [searchTerm] = useSearchHook();
 
-  // const fetchProductsData = useCallback(async () => {
-  //   try {
-  //     const res = await fetch("https://itproducts.onrender.com/products");
-  //     if (!res.ok) {
-  //       throw new Error("Oops! An error has occured");
-  //     }
-  //     const data = await res.json();
-  //     setProducts(data);
-  //     setFilterProducts(data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   fetchProductsData();
-  // }, [fetchProductsData]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -120,7 +103,7 @@ const Home = () => {
         <h1 className="capitalize text-left text-2xl md:text-3xl">
           {!searchTerm && category}
         </h1>
-        <div className="flex flex-wrap justify-center gap-3 my-6">
+        <div className="flex flex-wrap justify-center gap-1 sm:gap-3 my-6">
           {filteredProductsList.length === 0 ? (
             <h1 className="text-3xl h-screen">No products match your search</h1>
           ) : (
