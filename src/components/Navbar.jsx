@@ -64,7 +64,7 @@ const Navbar = () => {
                 darkMode
                   ? "bg-light-black text-green-200"
                   : "text-light-primary"
-              } inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:text-accent-foreground h-9 w-9 relative `}
+              } inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:text-accent-foreground h-9 w-9 relative`}
               onClick={handleSearch}
             >
               <RiSearchLine className="h-5 w-5" />
