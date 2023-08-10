@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import { useSearchHook } from "../components/SearchTermProvider";
 import Header from "../components/Header";
 import Catergories from "../components/Catergories";
@@ -7,25 +7,41 @@ import Footer from "../components/Footer";
 import GadgetCard from "../components/GadgetCard";
 
 const Home = () => {
+  // State for storing all products and filtered products
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
+
+  // State for current category selection and search term
   const [category, setCategory] = useState("All Categories");
   const [searchTerm] = useSearchHook();
 
+  // Effect to fetch products data from the API
   useEffect(() => {
+    const cancelToken = axios.CancelToken.source();
+
     const fetchData = async () => {
       try {
-        const res = await axios.get("https://itproducts.onrender.com/products");
-        setProducts(res.data);
-        setFilterProducts(res.data);
+        const { data } = await axios.get(
+          "https://itproducts.onrender.com/products",
+          { cancelToken: cancelToken.token }
+        );
+        setProducts(data);
+        setFilterProducts(data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error(
+          `Error fetching data: ${error.response?.status} - ${error.response?.statusText}`
+        );
       }
     };
 
     fetchData();
+
+    return () => {
+      cancelToken.cancel();
+    };
   }, []);
 
+  // Use useMemo to filter products based on search term
   const filteredProductsList = useMemo(() => {
     return filterProducts.filter((val) => {
       if (searchTerm === "") {
@@ -36,6 +52,7 @@ const Home = () => {
     });
   }, [filterProducts, searchTerm]);
 
+  // Return loading animation if no filtered products yet
   if (filterProducts.length === 0)
     return (
       <svg
@@ -85,12 +102,15 @@ const Home = () => {
       </svg>
     );
 
+  // Display product at index 5
   const displayProduct = products[5];
 
   return (
     <div className="text-center">
+      {/* Display header if no search term */}
       {!searchTerm && <Header displayProduct={displayProduct} />}
 
+      {/* Display categories if no search term */}
       {!searchTerm && (
         <Catergories
           products={products}
@@ -99,20 +119,25 @@ const Home = () => {
         />
       )}
 
+      {/* Display filtered products */}
       <div className="containerWrap p-2 mt-4">
         <h1 className="capitalize text-left text-2xl md:text-3xl">
+          {/* Display selected category */}
           {!searchTerm && category}
         </h1>
         <div className="flex flex-wrap justify-center gap-1 sm:gap-3 my-6">
           {filteredProductsList.length === 0 ? (
+            // Display no products message
             <h1 className="text-3xl h-screen">No products match your search</h1>
           ) : (
+            // Display filtered product cards
             filteredProductsList.map((result) => (
               <GadgetCard data={result} key={result.id} />
             ))
           )}
         </div>
       </div>
+      {/* Display footer */}
       <Footer />
     </div>
   );

@@ -1,42 +1,59 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-// import { useThemeHook } from "../components/ThemeProvider";
 import { FaCartArrowDown } from "react-icons/fa";
 import { useCart } from "react-use-cart";
 import Footer from "../components/Footer";
 
 const GadgetDetail = () => {
+  // Extracting 'id' parameter from the URL
   const { id } = useParams();
+
+  // Access cart functions from 'useCart' hook
   const { addItem } = useCart();
-  // const [theme] = useThemeHook();
+
+  // State to store gadget details fetched from the API
   const [gadgetDetails, setGadgetDetails] = useState([]);
 
+  // Convert price to integer
   const updatedPrice = parseInt(gadgetDetails.price);
   gadgetDetails.price = updatedPrice;
 
+  // Effect to fetch gadget details based on 'id' parameter
   useEffect(() => {
+    const cancelToken = axios.CancelToken.source();
+
     const fetchData = async () => {
       try {
-        const res = await axios.get(
-          `https://itproducts.onrender.com/products/${id}`
+        const { data } = await axios.get(
+          `https://itproducts.onrender.com/products/${id}`,
+          { cancelToken: cancelToken.token }
         );
-        setGadgetDetails(res.data);
+        setGadgetDetails(data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error(
+          `Error fetching data: ${error.response?.status} - ${error.response?.statusText}`
+        );
       }
     };
 
     fetchData();
+
+    return () => {
+      cancelToken.cancel();
+    };
   }, [id]);
 
+  // Destructuring gadget details
   const { img, title, price, brand, description, category, rating } =
     gadgetDetails;
 
+  // Function to add the gadget to the cart
   const addToCart = () => {
     addItem(gadgetDetails);
   };
 
+  // Render loading animation if gadget details are not yet fetched
   if (gadgetDetails.length === 0)
     return (
       <svg
@@ -86,14 +103,15 @@ const GadgetDetail = () => {
       </svg>
     );
 
-
   return (
     <div className="h-screen">
       <div className="containerWrap flex flex-col lg:flex-row p-4 md:p-16 gap-8">
+        {/* Display gadget image */}
         <div className="max-w-lg rounded-lg overflow-hidden">
           <img src={img} className="w-full rounded-md" alt={title} />
         </div>
 
+        {/* Display gadget details */}
         <div className="flex flex-col gap-4 max-w-lg p-2 rounded-lg">
           <div>
             <h1 className="text-3xl lg:text-5xl font-semibold">{title}</h1>
@@ -106,6 +124,7 @@ const GadgetDetail = () => {
           </div>
 
           <div>
+            {/* Display gadget description */}
             <h4 className="text-xl">Features</h4>
             <p className="text-base lg:text-lg leading-relaxed">
               {description}
@@ -122,12 +141,14 @@ const GadgetDetail = () => {
           </div>
 
           <div>
+            {/* Button to add gadget to cart */}
             <button className="btn flex items-center" onClick={addToCart}>
               Add To Cart <FaCartArrowDown className="ml-2" />
             </button>
           </div>
         </div>
       </div>
+      {/* Display footer */}
       <Footer />
     </div>
   );
